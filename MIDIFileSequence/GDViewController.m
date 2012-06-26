@@ -7,21 +7,26 @@
 //
 
 #import "GDViewController.h"
+#import "GDSoundEngine.h"
 
 @interface GDViewController ()
-
+@property (strong) id soundEngine;
 @end
 
 @implementation GDViewController
+@synthesize playButton;
+@synthesize soundEngine = _soundEngine;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.soundEngine = [[GDSoundEngine alloc] init];
 }
 
 - (void)viewDidUnload
 {
+    [self setPlayButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -31,4 +36,7 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (IBAction)play:(UIButton *)sender {
+    [self.soundEngine playMIDIFile];
+}
 @end
